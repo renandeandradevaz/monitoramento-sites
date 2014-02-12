@@ -20,7 +20,7 @@ class Site
         doc.css('style').remove
         doc.xpath("//@*[starts-with(name(),'on')]").remove
 
-        texto_somente = doc.html.body.text
+        texto_somente = doc.html.body.text.gsub(/[^a-zA-Z]/, '')
 
         if texto_somente != site.conteudo
           site.conteudo = texto_somente
