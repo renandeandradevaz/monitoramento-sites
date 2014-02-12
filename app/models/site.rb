@@ -5,6 +5,7 @@ class Site
   include Mongoid::Document
   field :url, type: String
   field :conteudo, type: String
+  field :elemento_com_conteudo_de_interesse, type: String
 
   def self.verifica_atualizacao
 
@@ -20,7 +21,11 @@ class Site
         doc.css('style').remove
         doc.xpath("//@*[starts-with(name(),'on')]").remove
 
-        texto_somente = doc.html.body.text.gsub(/[^a-zA-Z]/, '')
+        if site.elemento_com_conteudo_de_interesse.blank?
+          texto_somente = doc.html.body.text.gsub(/[^a-zA-Z]/, '')
+        else
+          texto_somente = doc.css(site.elemento_com_conteudo_de_interesse).text.gsub(/[^a-zA-Z]/, '')
+        end
 
         if texto_somente != site.conteudo
           site.conteudo = texto_somente

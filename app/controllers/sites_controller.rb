@@ -6,6 +6,9 @@ class SitesController < ApplicationController
   end
 
   def show
+
+    Site.verifica_atualizacao
+
   end
 
   def new
@@ -55,6 +58,6 @@ class SitesController < ApplicationController
     end
 
     def site_params
-      params.require(:site).permit(:url)
+      params.require(:site).permit(:url, :elemento_com_conteudo_de_interesse)
     end
 end
