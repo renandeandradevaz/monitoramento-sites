@@ -6,9 +6,6 @@ class SitesController < ApplicationController
   end
 
   def show
-
-    Site.verifica_atualizacao
-
   end
 
   def new
