@@ -24,7 +24,7 @@ class Site
         if site.elemento_com_conteudo_de_interesse.blank?
           texto_somente = doc.html.body.text.gsub(/[^a-zA-Z]/, '')
         else
-          texto_somente = doc.css(site.elemento_com_conteudo_de_interesse).text.gsub(/[^a-zA-Z]/, '')
+          texto_somente = doc.css(site.elemento_com_conteudo_de_interesse).first.text.gsub(/[^a-zA-Z]/, '')
         end
 
         if texto_somente != site.conteudo
