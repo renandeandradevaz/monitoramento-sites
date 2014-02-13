@@ -1,5 +1,15 @@
 class SitesController < ApplicationController
-  before_action :set_site, only: [:show, :edit, :update, :destroy]
+  before_action :set_site, only: [:show, :edit, :update, :destroy, :marcar_como_visto]
+
+  def verifica_atualizacao
+    Site.verifica_atualizacao
+  end
+
+  def marcar_como_visto
+    @site.ja_visto = true
+    @site.save
+    redirect_to @site.url
+  end
 
   def index
     @sites = Site.all
