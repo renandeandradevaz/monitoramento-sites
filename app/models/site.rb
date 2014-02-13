@@ -16,17 +16,8 @@ class Site
 
       if site.ja_visto
         begin
-          doc = Nokogiri::Slop(open(site.url))
 
-          doc.css('script').remove
-          doc.css('style').remove
-          doc.xpath("//@*[starts-with(name(),'on')]").remove
-
-          if site.elemento_com_conteudo_de_interesse.blank?
-            texto_somente = doc.html.body.text.gsub(/[^a-zA-Z]/, '')
-          else
-            texto_somente = doc.css(site.elemento_com_conteudo_de_interesse).first.text.gsub(/[^a-zA-Z]/, '')
-          end
+          texto_somente = verificar_conteudo(site)
 
           if texto_somente != site.conteudo
             site.conteudo = texto_somente
@@ -37,6 +28,21 @@ class Site
         rescue
         end
       end
+    end
+  end
+
+  def self.verificar_conteudo(site)
+
+    doc = Nokogiri::Slop(open(site.url))
+
+    doc.css('script').remove
+    doc.css('style').remove
+    doc.xpath("//@*[starts-with(name(),'on')]").remove
+
+    if site.elemento_com_conteudo_de_interesse.blank?
+      doc.html.body.text.gsub(/[^a-zA-Z]/, '')
+    else
+      doc.css(site.elemento_com_conteudo_de_interesse).first.text.gsub(/[^a-zA-Z]/, '')
     end
   end
 

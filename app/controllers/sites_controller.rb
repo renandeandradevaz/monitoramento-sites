@@ -7,8 +7,17 @@ class SitesController < ApplicationController
 
   def marcar_como_visto
     @site.ja_visto = true
+    @site.conteudo = Site.verificar_conteudo(@site)
     @site.save
     redirect_to @site.url
+  end
+
+  def marcar_tudo_como_visto
+    sites = Site.all
+    sites.each do |site|
+      site.ja_visto = true
+      site.save
+    end
   end
 
   def index
