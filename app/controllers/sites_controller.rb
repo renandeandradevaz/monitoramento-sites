@@ -25,6 +25,13 @@ class SitesController < ApplicationController
   end
 
   def show
+
+    Site.all.each do |site|
+
+     puts site.ja_visto
+
+      end
+
   end
 
   def new
