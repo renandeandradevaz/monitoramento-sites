@@ -34,10 +34,14 @@ class Site
     doc.xpath("//@*[starts-with(name(),'on')]").remove
 
     if site.elemento_com_conteudo_de_interesse.blank?
-      doc.html.body.text.gsub(/[^a-zA-Z]/, '').downcase.gsub("s", "")
+      remover_conteudo_desnecessario(doc.html.body.text)
     else
-      doc.css(site.elemento_com_conteudo_de_interesse).first.text.gsub(/[^a-zA-Z]/, '').downcase.gsub("s", "")
+      remover_conteudo_desnecessario(doc.css(site.elemento_com_conteudo_de_interesse).first.text)
     end
+  end
+  
+  def self.remover_conteudo_desnecessario(string)
+    string.gsub(/[^a-zA-Z]/, '').downcase.gsub("s", "")
   end
 
   private
