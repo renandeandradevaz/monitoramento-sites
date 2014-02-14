@@ -13,8 +13,7 @@ class SitesController < ApplicationController
   end
 
   def marcar_tudo_como_visto
-    sites = Site.all
-    sites.each do |site|
+    Site.all.each do |site|
       site.ja_visto = true
       site.save
     end
@@ -25,13 +24,6 @@ class SitesController < ApplicationController
   end
 
   def show
-
-    Site.all.each do |site|
-
-     puts site.ja_visto
-
-      end
-
   end
 
   def new
@@ -76,11 +68,11 @@ class SitesController < ApplicationController
   end
 
   private
-    def set_site
-      @site = Site.find(params[:id])
-    end
+  def set_site
+    @site = Site.find(params[:id])
+  end
 
-    def site_params
-      params.require(:site).permit(:url, :elemento_com_conteudo_de_interesse)
-    end
+  def site_params
+    params.require(:site).permit(:url, :elemento_com_conteudo_de_interesse)
+  end
 end

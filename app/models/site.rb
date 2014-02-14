@@ -10,23 +10,17 @@ class Site
 
   def self.verifica_atualizacao
 
-    sites = all
+    where(:ja_visto => true).each do |site|
+      begin
+        texto_somente = verificar_conteudo(site)
 
-    sites.each do |site|
-
-      if site.ja_visto
-        begin
-
-          texto_somente = verificar_conteudo(site)
-
-          if texto_somente != site.conteudo
-            site.conteudo = texto_somente
-            site.ja_visto = false
-            site.save
-            enviar_email site
-          end
-        rescue
+        if texto_somente != site.conteudo
+          site.conteudo = texto_somente
+          site.ja_visto = false
+          site.save
+          enviar_email site
         end
+      rescue
       end
     end
   end
