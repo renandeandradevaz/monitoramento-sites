@@ -34,9 +34,9 @@ class Site
     doc.xpath("//@*[starts-with(name(),'on')]").remove
 
     if site.elemento_com_conteudo_de_interesse.blank?
-      doc.html.body.text.gsub(/[^a-zA-Z]/, '')
+      doc.html.body.text.gsub(/[^a-zA-Z]/, '').gsub("s", "")
     else
-      doc.css(site.elemento_com_conteudo_de_interesse).first.text.gsub(/[^a-zA-Z]/, '')
+      doc.css(site.elemento_com_conteudo_de_interesse).first.text.gsub(/[^a-zA-Z]/, '').gsub("s", "")
     end
   end
 
