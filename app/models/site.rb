@@ -18,9 +18,10 @@ class Site
           site.conteudo = texto_somente
           site.ja_visto = false
           site.save
-          enviar_email site
+          enviar_email(site, "Atualizacao no site ")
         end
       rescue
+        enviar_email(site, "Erro no site ")
       end
     end
   end
@@ -45,7 +46,7 @@ class Site
   end
 
   private
-  def self.enviar_email(site)
+  def self.enviar_email(site, assunto)
 
     ActionMailer::Base.smtp_settings = {
         :address => "smtp.gmail.com",
@@ -60,7 +61,7 @@ class Site
     ActionMailer::Base.mail(
         :from => "monitoramentodesites@gmail.com",
         :to => "renanandrade_rj@hotmail.com",
-        :subject => "Atualizacao no site " << site.url,
+        :subject => assunto << site.url,
         :body => "http://monitoramentodesites.co.vu:3001/sites/#{site.id}/marcar_como_visto")
     .deliver
 

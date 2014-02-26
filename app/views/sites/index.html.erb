@@ -5,7 +5,7 @@
   <tbody>
     <% @sites.each do |site| %>
       <tr>
-        <td style="padding: 20px;" ><%= site.url %></td>
+        <td style="padding: 20px;" > <a href="<%= site.url %>" > <%= site.url %> </a> </td>
         <td><%= link_to 'Show', site %></td>
         <td><%= link_to 'Edit', edit_site_path(site) %></td>
         <td><%= link_to 'Destroy', site, method: :delete, data: { confirm: 'Are you sure?' } %></td>
