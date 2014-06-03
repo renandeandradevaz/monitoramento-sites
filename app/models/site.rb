@@ -62,7 +62,7 @@ class Site
         :from => "monitoramentodesites@gmail.com",
         :to => "renanandrade_rj@hotmail.com",
         :subject => assunto << site.url,
-        :body => "http://monitoramentodesites.co.vu:3001/sites/#{site.id}/marcar_como_visto")
+        :body => "http://monitoramentodesites.co.vu:3002/sites/#{site.id}/marcar_como_visto")
     .deliver
 
   end
