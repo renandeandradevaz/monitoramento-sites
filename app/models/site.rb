@@ -53,7 +53,7 @@ class Site
         :domain => "gmail.com",
         :port => 587,
         :user_name => "monitoramentodesites@gmail.com",
-        :password => "digdindigdin",
+        :password => "digdindigdin2",
         :authentication => "plain",
         :enable_starttls_auto => true
     }
